@@ -143,6 +143,13 @@ console.log(updateDoc,"updating post")
 })
 
 
+app.delete("/createpost",async(req,res)=>{
+  const {id} = req.body
+  const postDoc = await Post.deleteOne(id)
+
+res.json(postDoc)
+})
+
 app.listen(4000, () => {
   console.log("server started at port 4000");
 });

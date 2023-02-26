@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Usercontext } from "../Usercontext";
 
 function Postpage() {
@@ -14,8 +14,22 @@ function Postpage() {
     });
   },[]);
 console.log(postInfo)
+const navigate =  useNavigate()
+const deleteFunction = async (e) =>{
+e.preventDefault()
+const response = await fetch("http://localhost:4000/createpost",{
+      method:"DELETE",
+    })
+    if(response.ok){
+alert("delected successfully")
+navigate('/')
+    }
+}
 
 if(!postInfo) return " "
+
+
+
   return( 
 <div className="post-page">
 <h1>{postInfo.title}</h1>
@@ -23,6 +37,7 @@ if(!postInfo) return " "
 {userInfo.id === postInfo.author._id && (
   <div className="edit-row">
     <Link to={`/edit/${postInfo._id}`} className="edit-btn" href="http://">Edit this post</Link>
+    <button onClick={deleteFunction}>Delete</button>
   </div>
 )}
     <div className="image">

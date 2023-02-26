@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 
-import {Navigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 const modules = {
   toolbar: [
     [{ header: [1, 2, false] }],
@@ -24,6 +24,7 @@ function Createpost() {
   const [content, setContent] = useState("");
   const [files, setFiles] = useState("");
   const [redirect ,setRedirect] = useState(false)
+  const navigate = useNavigate()
 
   const createNewPost = async(e) => {
     e.preventDefault();
@@ -48,7 +49,8 @@ function Createpost() {
   };
 
   if(redirect){
- alert("success")
+ alert("created successfully")
+navigate("/")
   }
 
 
